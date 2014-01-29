@@ -1,0 +1,22 @@
+# SetDefaultCategory
+#
+# Release 1.0.0 (2014-1-29)
+#
+# Copyright (c) bit part LLC. / Powered by mt-plug.in
+name: SetDefaultCategory
+id: SetDefaultCategory
+key: setdefaultcategory
+version: 1.0.0
+author_name: <__trans phrase="bit part LLC">
+author_link: http://bit-part.net/
+description: <__trans phrase="You can set default [_2] to [_1]." params="<__trans phrase="Entry">%%<__trans phrase="Categories">">
+plugin_link: https://github.com/bit-part/mt-plugin-SetDefaultCategory
+doc_link: https://github.com/bit-part/mt-plugin-SetDefaultCategory/blob/master/README.md
+l10n_class: SetDefaultCategory::L10N
+blog_config_template: blog_config.tmpl
+settings:
+    default_cats:
+        scope: blog
+        default:
+callbacks:
+    MT::App::CMS::template_param.edit_entry: $SetDefaultCategory::SetDefaultCategory::Callbacks::template_param_edit_entry

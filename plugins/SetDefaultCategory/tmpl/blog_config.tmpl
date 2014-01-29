@@ -1,0 +1,29 @@
+<mtapp:setting
+    id="default_cats"
+    label="<__trans phrase='default'><__trans phrase='category'>"
+    hint=""
+    show_hint="0">
+
+    <!-- input:text -->
+    <input type="text" name="default_cats" id="default_cats" class="text" value="<mt:var name="default_cats" escape="html">" mt:watch-change="1" autocomplete="off" />
+    <div class="hint"><__trans phrase ="The comma separated ID list of categories to set to default."></div>
+    <div class="msg">
+        <mt:Categories include_blogs="all" show_empty="1">
+        <mt:If name="__first__">
+        <p><__trans phrase="The [_1] in this [_2]/[_3]." params="<__trans phrase="Categories">%%<__trans phrase="Website">%%<__trans phrase="Blog">"></p>
+        <ul id="SetDefaultCategory-catlist">
+        </mt:If>
+            <li class="cat-<mt:BlogID>" style="display:none;"><mt:CategoryLabel> : <mt:CategoryID> (<mt:BlogName>)</li>
+        <mt:If name="__last__">
+        </ul>
+        </mt:If>
+        </mt:Categories>
+    </div>
+</mtapp:setting>
+
+<script type="text/javascript">
+(function($){
+    var cls = 'cat-' + $("input[name='blog_id']").val();
+    $('#SetDefaultCategory-catlist').find('.' + cls).show();
+})(jQuery);
+</script>
