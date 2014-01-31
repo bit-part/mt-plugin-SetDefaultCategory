@@ -6,7 +6,7 @@
 
     <!-- input:text -->
     <input type="text" name="default_cats" id="default_cats" class="text" value="<mt:var name="default_cats" escape="html">" mt:watch-change="1" autocomplete="off" />
-    <div class="hint"><__trans phrase ="The comma separated ID list of categories to set to default."></div>
+    <div class="hint"><__trans phrase ="The comma separated ID list of [_1] to set to default." params="<__trans phrase="Categories">"></div>
     <div class="msg">
         <mt:Categories include_blogs="all" show_empty="1">
         <mt:If name="__first__">
@@ -19,6 +19,27 @@
         </mt:If>
         </mt:Categories>
     </div>
+</mtapp:setting>
+
+<mt:SetVarBlock name="post_save_enable_label"><__trans
+    phrase="Use setting Default [_1] after saving [_2]"
+    params="<__trans phrase="Categories">%%<__trans phrase="Entry">"
+></mt:SetVarBlock>
+<mt:SetVarBlock name="post_save_enable_hint"><__trans
+    phrase="If you save [_1] without setting a [_2], Default [_2] is set."
+    params="<__trans phrase="Entry">%%<__trans phrase="Category">"
+></mt:SetVarBlock>
+<mtapp:setting
+    id="post_save_enable"
+    label="<mt:Var name="post_save_enable_label">"
+    hint="<mt:Var name="post_save_enable_hint">"
+    show_hint="1">
+
+    <!-- select -->
+    <select name="post_save_enable" id="post_save_enable">
+        <option value="disable"<mt:if name="post_save_enable" eq="disable"> selected="selected"</mt:if>><__trans phrase="Disable"></option>
+        <option value="enable"<mt:if name="post_save_enable" eq="enable"> selected="selected"</mt:if>><__trans phrase="Enable"></option>
+    </select>
 </mtapp:setting>
 
 <script type="text/javascript">
