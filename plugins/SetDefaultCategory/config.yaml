@@ -9,7 +9,7 @@ key: setdefaultcategory
 version: 1.0.0
 author_name: <__trans phrase="bit part LLC">
 author_link: http://bit-part.net/
-description: <__trans phrase="You can set default [_2] to [_1]." params="<__trans phrase="Entry">%%<__trans phrase="Categories">">
+description: <__trans phrase="You can set Default [_2] to [_1]." params="<__trans phrase="Entry">%%<__trans phrase="Categories">">
 plugin_link: https://github.com/bit-part/mt-plugin-SetDefaultCategory
 doc_link: https://github.com/bit-part/mt-plugin-SetDefaultCategory/blob/master/README.md
 l10n_class: SetDefaultCategory::L10N
@@ -18,5 +18,9 @@ settings:
     default_cats:
         scope: blog
         default:
+    post_save_enable:
+        scope: blog
+        default: disable
 callbacks:
     MT::App::CMS::template_param.edit_entry: $SetDefaultCategory::SetDefaultCategory::Callbacks::template_param_edit_entry
+    MT::App::CMS::cms_post_save.entry: $SetDefaultCategory::SetDefaultCategory::Callbacks::cms_post_save_entry
