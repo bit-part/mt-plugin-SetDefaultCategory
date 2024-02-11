@@ -1,50 +1,45 @@
-<mtapp:setting
-    id="default_cats"
-    label="<__trans phrase='default'><__trans phrase='category'>"
-    hint=""
-    show_hint="0">
-
-    <!-- input:text -->
-    <input type="text" name="default_cats" id="default_cats" class="text" value="<mt:var name="default_cats" escape="html">" mt:watch-change="1" autocomplete="off" />
-    <div class="hint"><__trans phrase ="The comma separated ID list of [_1] to set to default." params="<__trans phrase="Categories">"></div>
-    <div class="msg">
-        <mt:Categories include_blogs="all" show_empty="1">
+<mtapp:setting id="default_cats">
+    <label for="default_cats" class="form-label"><__trans phrase="Default Categories IDs" /></label>
+    <input type="text" name="default_cats" id="default_cats" class="form-control" value="<mt:var name='default_cats' escape='html'>" mt:watch-change="1" autocomplete="off" />
+    <div class="form-text">
+        <__trans phrase ="The comma separated ID list of [_1] to set to default." params="<__trans phrase='Categories'>" />
+    </div>
+    <mt:Categories include_blogs="all" show_empty="1">
         <mt:If name="__first__">
-        <p><__trans phrase="The [_1] in this [_2]/[_3]." params="<__trans phrase="Categories">%%<__trans phrase="Website">%%<__trans phrase="Blog">"></p>
-        <ul id="SetDefaultCategory-catlist">
+            <div class="mt-4 alert alert-info">
+                <p><__trans phrase="Categories in this site." /></p>
+                <ul id="SetDefaultCategory-catlist">
         </mt:If>
-            <li class="cat-<mt:BlogID>" style="display:none;"><mt:CategoryLabel> : <mt:CategoryID> (<mt:BlogName>)</li>
+        <li class="default_cats_list_item" data-default-cats-blog-id="<mt:BlogID>" style="display:none;"><mt:CategoryLabel> : <mt:CategoryID> (<mt:BlogName>)</li>
         <mt:If name="__last__">
-        </ul>
+            </ul>
+            </div>
         </mt:If>
-        </mt:Categories>
+    </mt:Categories>
+</mtapp:setting>
+
+<mtapp:setting id="post_save_enable">
+    <label for="post_save_enable" class="form-label">
+        <__trans phrase="Use setting Default [_1] after saving [_2]" params="<__trans phrase='Categories'>%%<__trans phrase='Entry'>" />
+    </label>
+    <select name="post_save_enable" id="post_save_enable" class="form-select custom-select">
+        <option value="disable"<mt:if name='post_save_enable' eq='disable'> selected="selected"</mt:if>><__trans phrase="Disable" /></option>
+        <option value="enable"<mt:if name='post_save_enable' eq='enable'> selected="selected"</mt:if>><__trans phrase="Enable" /></option>
+    </select>
+    <div class="form-text">
+        <__trans phrase="If you save [_1] without setting a [_2], Default [_2] is set." params="<__trans phrase='Entry'>%%<__trans phrase='Category'>" />
     </div>
 </mtapp:setting>
 
-<mt:SetVarBlock name="post_save_enable_label"><__trans
-    phrase="Use setting Default [_1] after saving [_2]"
-    params="<__trans phrase="Categories">%%<__trans phrase="Entry">"
-></mt:SetVarBlock>
-<mt:SetVarBlock name="post_save_enable_hint"><__trans
-    phrase="If you save [_1] without setting a [_2], Default [_2] is set."
-    params="<__trans phrase="Entry">%%<__trans phrase="Category">"
-></mt:SetVarBlock>
-<mtapp:setting
-    id="post_save_enable"
-    label="<mt:Var name="post_save_enable_label">"
-    hint="<mt:Var name="post_save_enable_hint">"
-    show_hint="1">
-
-    <!-- select -->
-    <select name="post_save_enable" id="post_save_enable">
-        <option value="disable"<mt:if name="post_save_enable" eq="disable"> selected="selected"</mt:if>><__trans phrase="Disable"></option>
-        <option value="enable"<mt:if name="post_save_enable" eq="enable"> selected="selected"</mt:if>><__trans phrase="Enable"></option>
-    </select>
-</mtapp:setting>
-
 <script type="text/javascript">
-(function($){
-    var cls = 'cat-' + $("input[name='blog_id']").val();
-    $('#SetDefaultCategory-catlist').find('.' + cls).show();
-})(jQuery);
+    (function () {
+        const currentBlogId = Number(document.querySelector('input[name="blog_id"]').value);
+        const items = document.querySelectorAll('.default_cats_list_item');
+        items.forEach((item) => {
+            const blogId = Number(item.getAttribute('data-default-cats-blog-id'));
+            if (blogId === currentBlogId) {
+                item.style.display = 'list-item';
+            }
+        });
+    })();
 </script>

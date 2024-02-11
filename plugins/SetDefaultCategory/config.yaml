@@ -6,7 +6,7 @@
 name: SetDefaultCategory
 id: SetDefaultCategory
 key: setdefaultcategory
-version: 1.0.0
+version: 1.1.0
 author_name: <__trans phrase="bit part LLC">
 author_link: http://bit-part.net/
 description: <__trans phrase="You can set Default [_2] to [_1]." params="<__trans phrase="Entry">%%<__trans phrase="Categories">">
@@ -17,7 +17,7 @@ blog_config_template: blog_config.tmpl
 settings:
     default_cats:
         scope: blog
-        default:
+        default: ""
     post_save_enable:
         scope: blog
         default: disable

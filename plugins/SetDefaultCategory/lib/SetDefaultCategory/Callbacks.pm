@@ -9,6 +9,7 @@ sub template_param_edit_entry {
     my $blog_id = $app->blog->id;
     my $plugin = MT->component('SetDefaultCategory');
     my $conf_default_cats = $plugin->get_config_value('default_cats', 'blog:' . $blog_id) or return;
+    return if ($param->{id});
 
     $conf_default_cats =~ s/\s//g;
     my @default_cats = split(',', $conf_default_cats);
