@@ -22,7 +22,7 @@
     <label for="post_save_enable" class="form-label">
         <__trans phrase="Use setting Default [_1] after saving [_2]" params="<__trans phrase='Categories'>%%<__trans phrase='Entry'>" />
     </label>
-    <select name="post_save_enable" id="post_save_enable" class="form-select">
+    <select name="post_save_enable" id="post_save_enable" class="form-select custom-select">
         <option value="disable"<mt:if name='post_save_enable' eq='disable'> selected="selected"</mt:if>><__trans phrase="Disable" /></option>
         <option value="enable"<mt:if name='post_save_enable' eq='enable'> selected="selected"</mt:if>><__trans phrase="Enable" /></option>
     </select>
