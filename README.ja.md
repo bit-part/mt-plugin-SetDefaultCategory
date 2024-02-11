@@ -7,8 +7,9 @@ SetDefaultCategory は Movable Type の記事にデフォルトカテゴリを�
 
 ## 動作条件
 
-* Movable Type 5 (おそらく)
-* Movable Type 6.0 (確認済み)
+* Movable Type 6
+* Movable Type 7
+* Movable Type 8
 
 ## インストール方法
 
